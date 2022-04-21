@@ -202,6 +202,23 @@ function abreModal(titulo, mensagem){
     })
 }
 
+escutarTeclas();
+function escutarTeclas() {
+  window.addEventListener('keydown', pressKeys);
+  function pressKeys(letra) {
+    if (tentativas !== 0) {
+      if (letra.key >= 'a' && letra.key <= 'z') {
+        const letraPressionada = letra.key.toUpperCase();
+        document.getElementById('tecla-' + letraPressionada).disabled = true; //desabilita botão depois de clicado
+        //se o número de tentativas for maior que 0 muda a cor da tecla
+        mudarStyleLetra('tecla-' + letraPressionada);
+        comparaListas(letraPressionada);
+        MontarPalavraNaTela();
+      }
+    } else return;
+  }
+}
+
 let btnReiniciar = document.querySelector("#btnReiniciar")
 btnReiniciar.addEventListener("click", function(){//variável tem envento de escuta
     location.reload() //recarrega a página
